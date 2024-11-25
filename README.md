@@ -9,7 +9,7 @@ It is assumed that the workspace is `~/ros2_ws/`.
 cd ~/ros2_ws/src
 ```
 ``` r
-git clone https://github.com/sze-info/ros2_py_template
+git clone https://github.com/zsedelypeter/Ros2Tank
 ```
 
 ### Build ROS 2 packages
