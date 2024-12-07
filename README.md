@@ -9,7 +9,7 @@ It is assumed that the workspace is `~/ros2_ws/`.
 cd ~/ros2_ws/src
 ```
 ``` r
-git clone https://github.com/zsedelypeter/Ros2Tank
+git clone https://github.com/zsedelypeter/Ros2tank
 ```
 
 ### Build ROS 2 packages
@@ -17,7 +17,7 @@ git clone https://github.com/zsedelypeter/Ros2Tank
 cd ~/ros2_ws
 ```
 ``` r
-colcon build --packages-select ros2_py_template --symlink-install
+colcon build --packages-select ros2tank --symlink-install
 ```
 
 <details>
