@@ -17,7 +17,11 @@
             filename="gz-sim-scene-broadcaster-system"
             name="gz::sim::systems::SceneBroadcaster">
         </plugin>
-
+        <plugin
+            filename="libignition-gazebo-sensors-system.so"
+            name="ignition::gazebo::systems::Sensors">
+            <render_engine>ogre2</render_engine>
+        </plugin>
         <light type="directional" name="sun">
             <cast_shadows>true</cast_shadows>
             <pose>0 0 10 0 0 0</pose>
@@ -59,13 +63,13 @@
         </model>
 
         <model name="target1">
-            <pose relative_to="world">10 0 0 0 0 0</pose>
+            <pose relative_to="world">5 0 3 0 0 0</pose>
             <link name="body">
                 <visual name="visual">
                     <geometry>
                     <cylinder>
                         <radius>1</radius>
-                        <length>3</length>
+                        <length>15</length>
                     </cylinder>
                     </geometry>
                     <material>
@@ -78,7 +82,7 @@
                     <geometry>
                     <cylinder>
                         <radius>1</radius>
-                        <length>3</length>
+                        <length>30</length>
                     </cylinder>
                     </geometry>
                 </collision>
@@ -119,7 +123,39 @@
                         </box>
                     </geometry>
                 </collision>
+                <sensor name='gpu_lidar' type='gpu_lidar'>"
+                    <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
+                    <topic>lidar</topic>
+                    <update_rate>10</update_rate>
+                    <ray>
+                        <scan>
+                            <horizontal>
+                                <samples>640</samples>
+                                <resolution>1</resolution>
+                                <min_angle>-1.396263</min_angle>
+                                <max_angle>1.396263</max_angle>
+                            </horizontal>
+                            <vertical>
+                                <samples>1</samples>
+                                <resolution>0.01</resolution>
+                                <min_angle>0</min_angle>
+                                <max_angle>0</max_angle>
+                            </vertical>
+                        </scan>
+                        <range>
+                            <min>0.08</min>
+                            <max>10.0</max>
+                            <resolution>0.01</resolution>
+                        </range>
+                    </ray>
+                    <always_on>1</always_on>
+                    <visualize>true</visualize>
+                </sensor>
             </link>
+
+            <frame name='lidar_frame' attached_to='chassis'>
+                <pose>0 0 0.5 0 0 0</pose>
+            </frame>
 
             <!--Bal hátsó kerék-->
             <link name='left_wheel'>
@@ -343,50 +379,7 @@
                 </collision>
             </link>
 
-
-            <!--Lidar-->
-            <link name='lidar'>
-                <pose relative_to='turret'>0 0 0.3 0 0 0</pose>
-                <sensor name='lidar_sensor' type='gpu_lidar'>
-                    <pose>0 0 0 0 0 0</pose>
-                    <update_rate>10</update_rate>
-                    <always_on>true</always_on>
-                    <visualize>true</visualize>
-                    <lidar>
-                        <horizontal>
-                            <samples>640</samples>
-                            <resolution>1</resolution>
-                            <min_angle>-2.0944</min_angle>
-                            <max_angle>2.0944</max_angle>
-                        </horizontal>
-                        <vertical>
-                            <samples>1</samples>
-                            <resolution>1</resolution>
-                            <min_angle>0</min_angle>
-                            <max_angle>0</max_angle>
-                        </vertical>
-                        <range>
-                            <min>0.2</min>
-                            <max>30.0</max>
-                            <resolution>0.01</resolution>
-                        </range>
-                    </lidar>
-                    <topic>/lidar/points</topic>
-                </sensor>
-            </link>
-
-            <!--Lidar joint-->
-            <joint name='lidar_joint' type='revolute'>
-                <parent>turret</parent>
-                <child>lidar</child>
-                <axis>
-                    <xyz>0 0 1</xyz>
-                    <limit>
-                        <lower>-1.79769e+308</lower>
-                        <upper>1.79769e+308</upper>
-                    </limit>
-                </axis>
-            </joint>
+            
 
             <!--Lézer joint-->
             <joint name='laser_joint' type='fixed'>
@@ -464,7 +457,6 @@
                     </limit>
                 </axis>
             </joint>
-
         </model>
     </world>
 </sdf>
