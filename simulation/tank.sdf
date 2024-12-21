@@ -63,7 +63,7 @@
         </model>
 
         <model name="target1">
-            <pose relative_to="world">5 0 3 0 0 0</pose>
+            <pose relative_to="world">5 8 3 0 0 0</pose>
             <link name="body">
                 <visual name="visual">
                     <geometry>
@@ -93,14 +93,19 @@
             <plugin
                 filename="libignition-gazebo-diff-drive-system.so"
                 name="ignition::gazebo::systems::DiffDrive">
-                <left_joint>left_wheel_joint</left_joint>
                 <left_joint>left_front_wheel_joint</left_joint>
-                <right_joint>right_wheel_joint</right_joint>
                 <right_joint>right_front_wheel_joint</right_joint>
                 <wheel_separation>2.4</wheel_separation>
                 <wheel_radius>0.7</wheel_radius>
                 <odom_publish_frequency>1</odom_publish_frequency>
                 <topic>cmd_vel</topic>
+            </plugin>
+            <plugin
+                filename="libignition-gazebo-joint-controller-system.so"
+                name="ignition::gazebo::systems::JointController">
+                <joint_name>turret_joint</joint_name>
+                <topic>cmd_turret</topic>
+                <type>position</type>
             </plugin>
             <pose relative_to='world'>0 0 2.0 0 0 0</pose> 
             <link name='chassis'>

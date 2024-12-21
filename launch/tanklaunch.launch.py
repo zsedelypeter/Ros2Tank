@@ -33,7 +33,9 @@ def generate_launch_description():
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/lidar/points@sensor_msgs/msg/PointCloud2@ignition.msgs.PointCloudPacked'],
+        arguments=['/lidar/points@sensor_msgs/msg/PointCloud2@ignition.msgs.PointCloudPacked', 
+                   '/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
+                   '/cmd_turret@std_msgs/msg/Float64@ignition.msgs.Double'],
         output='screen'
     )
 
