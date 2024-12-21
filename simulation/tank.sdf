@@ -90,6 +90,18 @@
         </model>
 
         <model name='tank' canonical_link='chassis'>
+            <plugin
+                filename="libignition-gazebo-diff-drive-system.so"
+                name="ignition::gazebo::systems::DiffDrive">
+                <left_joint>left_wheel_joint</left_joint>
+                <left_joint>left_front_wheel_joint</left_joint>
+                <right_joint>right_wheel_joint</right_joint>
+                <right_joint>right_front_wheel_joint</right_joint>
+                <wheel_separation>2.4</wheel_separation>
+                <wheel_radius>0.7</wheel_radius>
+                <odom_publish_frequency>1</odom_publish_frequency>
+                <topic>cmd_vel</topic>
+            </plugin>
             <pose relative_to='world'>0 0 2.0 0 0 0</pose> 
             <link name='chassis'>
                 <pose relative_to='__model__'>0.5 0 0.4 0 0 0</pose>
@@ -428,6 +440,9 @@
                         <upper>1.79769e+308</upper>
                     </limit>
                 </axis>
+                <controller>
+                    <velocity name='left_front_wheel_velocity_controller'/>
+                </controller>
             </joint>
 
             <!--Jobb kerék joint-->

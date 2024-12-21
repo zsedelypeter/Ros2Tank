@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 from glob import glob
 import os
 
@@ -7,7 +7,7 @@ package_name = 'ros2tank'
 setup(
     name=package_name,
     version='0.0.0',
-    packages=find_packages(exclude=['test']),
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -19,11 +19,11 @@ setup(
     maintainer='todo',
     maintainer_email='todo@todo.com',
     description='TODO: Package description',
-    license='GNU General Public License v3.0',
+    license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            # 'control_vehicle = ros2tank.control_vehicle:main',
+            'control = ros2tank.control:main',
         ],
     },
 )

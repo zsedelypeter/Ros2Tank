@@ -46,10 +46,19 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Add control node
+    control_node = Node(
+        package='ros2tank',
+        executable='control',
+        name='control',
+        output='screen'
+    )
+
     ld = LaunchDescription()
     ld.add_action(gazebo)
     ld.add_action(rviz_node)
     ld.add_action(bridge)
     ld.add_action(tf_node)
+    ld.add_action(control_node)
 
     return ld
